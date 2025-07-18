@@ -15,7 +15,7 @@ public enum UserDefaultsType {
 
     var name: String {
         switch self {
-        case .user(let excludeKeys):
+        case .user:
             "User"
         case .system:
             "System"

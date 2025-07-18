@@ -23,16 +23,14 @@ public struct UserDefaultsBrowserView: View {
     private var defaults: [UserDefaultsContainer] {
         let standard = UserDefaultsContainer(
             name: "Standard",
-            defaults: .standard,
-            excludeKeys: { _ in false } // TODO: To fix using user excluding keys.
+            defaults: .standard
         )
 
         return [standard] + suiteNames.compactMap { name in
             UserDefaults(suiteName: name).map {
                 UserDefaultsContainer(
                     name: name,
-                    defaults: $0,
-                    excludeKeys: { _ in false } // TODO: To fix using user excluding keys.
+                    defaults: $0
                 )
             }
         }

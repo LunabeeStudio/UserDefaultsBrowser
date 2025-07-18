@@ -124,7 +124,7 @@ struct RowView: View {
                     // 􀩼 Console
                     //
                     Button {
-                        print(exportString)
+                        let _ = print(exportString)
                     } label: {
                         Image(systemName: "terminal")
                     }

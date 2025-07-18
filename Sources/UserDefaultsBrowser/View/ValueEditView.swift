@@ -270,7 +270,7 @@ struct ValueEditView: View {
         default:
             let object = defaults.object(forKey: key)
             value = .unknown
-            print("type: \(String(describing: object.self))")
+            let _ = print("type: \(String(describing: object.self))")
         }
     }
 

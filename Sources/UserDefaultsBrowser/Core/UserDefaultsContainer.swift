@@ -45,12 +45,11 @@ struct UserDefaultsContainer: Identifiable {
 
     let name: String
     let defaults: UserDefaults
-    let excludeKeys: (String) -> Bool
 
     var allKeys: [String] {
         Array(
             defaults.dictionaryRepresentation().keys.exclude {
-                isOSSKey($0) || excludeKeys($0)
+                isOSSKey($0)
             }
         )
     }
