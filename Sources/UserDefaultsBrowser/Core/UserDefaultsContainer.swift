@@ -28,7 +28,7 @@ private let userDefaultsSystemKeyPrefixes: [String] = [
     "SS",
     "PK",
     "WebKit",
-    "Mapping_"
+    "mapping_"
 ]
 
 private let userDefaultsFacebookKeyPrefixes: [String] = [
@@ -60,7 +60,7 @@ struct UserDefaultsContainer: Identifiable {
     }
 
     var userKeys: [String] {
-        allKeys.filter { isSystemKey($0) == false }
+        allKeys.filter { !isSystemKey($0) && !isFacebookKey($0) && !isFirebaseKey($0) }
     }
 
     var facebookKeys: [String] {
