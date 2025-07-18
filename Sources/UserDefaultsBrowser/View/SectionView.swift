@@ -56,7 +56,7 @@ struct SectionView: View {
                 //
                 Label(
                     defaults.name,
-                    systemImage: defaults.name == "standard" ? "person" : "externaldrive.connected.to.line.below"
+                    systemImage: defaults.name == "Standard" ? "person" : "externaldrive.connected.to.line.below"
                 )
 
                 Spacer()

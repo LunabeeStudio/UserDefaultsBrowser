@@ -64,7 +64,7 @@ struct UserDefaultsContainer: Identifiable {
     }
 
     var facebookKeys: [String] {
-        allKeys.filter { !isSystemKey($0) && isFacebookKey($0) }
+        allKeys.filter { isFacebookKey($0) }
     }
 
     var firebaseKeys: [String] {

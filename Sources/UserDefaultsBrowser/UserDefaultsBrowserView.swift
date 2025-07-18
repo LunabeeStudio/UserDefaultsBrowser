@@ -46,7 +46,7 @@ public struct UserDefaultsBrowserView: View {
                     SearchContainerView(type: .user(), defaults: defaults)
                         .navigationTitle("User")
                 } label: {
-                    Label("User", systemImage: "person")
+                    Label("User keys", systemImage: "person")
                 }
 
                 //
@@ -56,7 +56,7 @@ public struct UserDefaultsBrowserView: View {
                     SearchContainerView(type: .firebase, defaults: defaults)
                         .navigationTitle("Firebase")
                 } label: {
-                    Label("Firebase", systemImage: "iphone")
+                    Label("Firebase keys", systemImage: "iphone")
                 }
 
                 //
@@ -66,7 +66,7 @@ public struct UserDefaultsBrowserView: View {
                     SearchContainerView(type: .facebook, defaults: defaults)
                         .navigationTitle("Facebook")
                 } label: {
-                    Label("Facebook", systemImage: "iphone")
+                    Label("Facebook keys", systemImage: "iphone")
                 }
 
                 //
@@ -76,7 +76,7 @@ public struct UserDefaultsBrowserView: View {
                     SearchContainerView(type: .system, defaults: defaults)
                         .navigationTitle("System")
                 } label: {
-                    Label("System", systemImage: "iphone")
+                    Label("System keys", systemImage: "iphone")
                 }
             }
             .navigationTitle("UserDefaults Browser")
