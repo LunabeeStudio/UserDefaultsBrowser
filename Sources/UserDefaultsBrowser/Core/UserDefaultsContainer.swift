@@ -93,7 +93,7 @@ struct UserDefaultsContainer: Identifiable {
     // MARK: Private
 
     private func isOSSKey(_ key: String) -> Bool {
-        key.hasPrefix(UserDefaults.keyRepository)
+        key.hasPrefix(UserDefaults.keyRepositoryRoot)
     }
 
     private func isSystemKey(_ key: String) -> Bool {
