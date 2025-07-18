@@ -8,9 +8,6 @@
 import SwiftUI
 
 public struct UserDefaultsBrowserView: View {
-    // 💡 iOS 15+: `\.dismiss`
-    @Environment(\.presentationMode) private var presentationMode
-
     private let suiteNames: [String]
     private let accentColor: Color
 
@@ -43,111 +40,51 @@ public struct UserDefaultsBrowserView: View {
 
     public var body: some View {
         Group {
-            if presentationMode.wrappedValue.isPresented {
-                TabView {
-                    //
-                    // 􀉩 User
-                    //
-                    tabContent(title: "User") {
-                        SearchContainerView(type: .user(), defaults: defaults)
-                    }
-                    .tabItem {
-                        Label("User", systemImage: "person")
-                    }
-
-                    //
-                    // 􀟜 Firebase
-                    //
-                    tabContent(title: "Firebase") {
-                        SearchContainerView(type: .firebase, defaults: defaults)
-                    }
-                    .tabItem {
-                        Label("Firebase", systemImage: "iphone")
-                    }
-
-                    //
-                    // 􀟜 Facebook
-                    //
-                    tabContent(title: "Facebook") {
-                        SearchContainerView(type: .facebook, defaults: defaults)
-                    }
-                    .tabItem {
-                        Label("Facebook", systemImage: "iphone")
-                    }
-
-                    //
-                    // 􀟜 System
-                    //
-                    tabContent(title: "System") {
-                        SearchContainerView(type: .system, defaults: defaults)
-                    }
-                    .tabItem {
-                        Label("System", systemImage: "iphone")
-                    }
+            List {
+                //
+                // 􀉩 User
+                //
+                NavigationLink {
+                    SearchContainerView(type: .user(), defaults: defaults)
+                        .navigationTitle("User")
+                } label: {
+                    Label("User", systemImage: "person")
                 }
-            } else {
-                List {
-                    //
-                    // 􀉩 User
-                    //
-                    NavigationLink {
-                        SearchContainerView(type: .user(), defaults: defaults)
-                            .navigationTitle("User")
-                    } label: {
-                        Label("User", systemImage: "person")
-                    }
 
-                    //
-                    // 􀟜 Firebase
-                    //
-                    NavigationLink {
-                        SearchContainerView(type: .firebase, defaults: defaults)
-                            .navigationTitle("Firebase")
-                    } label: {
-                        Label("Firebase", systemImage: "iphone")
-                    }
-
-                    //
-                    // 􀟜 Facebook
-                    //
-                    NavigationLink {
-                        SearchContainerView(type: .facebook, defaults: defaults)
-                            .navigationTitle("Facebook")
-                    } label: {
-                        Label("Facebook", systemImage: "iphone")
-                    }
-
-                    //
-                    // 􀟜 System
-                    //
-                    NavigationLink {
-                        SearchContainerView(type: .system, defaults: defaults)
-                            .navigationTitle("System")
-                    } label: {
-                        Label("System", systemImage: "iphone")
-                    }
+                //
+                // 􀟜 Firebase
+                //
+                NavigationLink {
+                    SearchContainerView(type: .firebase, defaults: defaults)
+                        .navigationTitle("Firebase")
+                } label: {
+                    Label("Firebase", systemImage: "iphone")
                 }
-                .navigationTitle("UserDefaults Browser")
-                .navigationBarTitleDisplayMode(.inline)
+
+                //
+                // 􀟜 Facebook
+                //
+                NavigationLink {
+                    SearchContainerView(type: .facebook, defaults: defaults)
+                        .navigationTitle("Facebook")
+                } label: {
+                    Label("Facebook", systemImage: "iphone")
+                }
+
+                //
+                // 􀟜 System
+                //
+                NavigationLink {
+                    SearchContainerView(type: .system, defaults: defaults)
+                        .navigationTitle("System")
+                } label: {
+                    Label("System", systemImage: "iphone")
+                }
             }
+            .navigationTitle("UserDefaults Browser")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .accentColor(accentColor)
         .environment(\.customAccentColor, accentColor)
-    }
-
-    private func tabContent(title: String, content: () -> SearchContainerView) -> some View {
-        NavigationView {
-            content()
-                .navigationTitle(title)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button("Done") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-        }
-        .navigationViewStyle(.stack)
     }
 }
