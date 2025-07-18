@@ -39,44 +39,48 @@ public struct UserDefaultsBrowserView: View {
     public var body: some View {
         Group {
             List {
-                //
-                // 􀉩 User
-                //
-                NavigationLink {
-                    SearchContainerView(type: .user(), defaults: defaults)
-                        .navigationTitle("User")
-                } label: {
-                    Label("User keys", systemImage: "person")
+                Section("USER") {
+                    //
+                    // 􀉩 User
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .user(), defaults: defaults)
+                            .navigationTitle("User")
+                    } label: {
+                        Label("User keys", systemImage: "person")
+                    }
                 }
 
-                //
-                // 􀟜 Firebase
-                //
-                NavigationLink {
-                    SearchContainerView(type: .firebase, defaults: defaults)
-                        .navigationTitle("Firebase")
-                } label: {
-                    Label("Firebase keys", systemImage: "iphone")
-                }
+                Section("OTHER") {
+                    //
+                    // 􀟜 Firebase
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .firebase, defaults: defaults)
+                            .navigationTitle("Firebase")
+                    } label: {
+                        Label("Firebase keys", systemImage: "iphone")
+                    }
 
-                //
-                // 􀟜 Facebook
-                //
-                NavigationLink {
-                    SearchContainerView(type: .facebook, defaults: defaults)
-                        .navigationTitle("Facebook")
-                } label: {
-                    Label("Facebook keys", systemImage: "iphone")
-                }
+                    //
+                    // 􀟜 Facebook
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .facebook, defaults: defaults)
+                            .navigationTitle("Facebook")
+                    } label: {
+                        Label("Facebook keys", systemImage: "iphone")
+                    }
 
-                //
-                // 􀟜 System
-                //
-                NavigationLink {
-                    SearchContainerView(type: .system, defaults: defaults)
-                        .navigationTitle("System")
-                } label: {
-                    Label("System keys", systemImage: "iphone")
+                    //
+                    // 􀟜 System
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .system, defaults: defaults)
+                            .navigationTitle("System")
+                    } label: {
+                        Label("System keys", systemImage: "iphone")
+                    }
                 }
             }
             .navigationTitle("UserDefaults Browser")
