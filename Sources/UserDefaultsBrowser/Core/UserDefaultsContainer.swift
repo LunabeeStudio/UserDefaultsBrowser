@@ -64,11 +64,11 @@ struct UserDefaultsContainer: Identifiable {
     }
 
     var facebookKeys: [String] {
-        allKeys.filter { isFacebookKey($0) == false }
+        allKeys.filter { isFacebookKey($0) }
     }
 
     var firebaseKeys: [String] {
-        allKeys.filter { isFirebaseKey($0) == false }
+        allKeys.filter { isFirebaseKey($0) }
     }
 
     func extractKeys(of type: UserDefaultsType) -> [String] {
