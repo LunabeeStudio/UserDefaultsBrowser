@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 extension UserDefaults {
-    static let keyRepository = "YusukeHosonuma/UserDefaultsBrowser"
+    static let keyRepositoryRoot = "YusukeHosonuma"
+    static let keyRepository = "\(keyRepositoryRoot)/UserDefaultsBrowser"
     static let keyVersion = "1.0.0" // 💡 Please update version number when data incompatibility occur.
 
     static let keyPrefix: String = "\(keyRepository)/\(keyVersion)/"
