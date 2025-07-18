@@ -14,7 +14,6 @@ import UIKit
 final class UserDefaultsBrowserLauncherViewController: UIViewController {
     private let rootWindow: UIWindow
     private let suiteNames: [String]
-    private let excludeKeys: (String) -> Bool
     private let accentColor: UIColor
     private let imageName: String
     private let displayStyle: DisplayStyle
@@ -22,14 +21,12 @@ final class UserDefaultsBrowserLauncherViewController: UIViewController {
     init(
         rootWindow: UIWindow,
         suiteNames: [String],
-        excludeKeys: @escaping (String) -> Bool,
         accentColor: UIColor,
         imageName: String,
         displayStyle: DisplayStyle
     ) {
         self.rootWindow = rootWindow
         self.suiteNames = suiteNames
-        self.excludeKeys = excludeKeys
         self.accentColor = accentColor
         self.imageName = imageName
         self.displayStyle = displayStyle
@@ -54,7 +51,6 @@ final class UserDefaultsBrowserLauncherViewController: UIViewController {
     @objc private func tapButton() {
         let vc = UserDefaultsBrowserViewController(
             suiteNames: suiteNames,
-            excludeKeys: excludeKeys,
             accentColor: accentColor
         )
         vc.modalPresentationStyle = displayStyle.modalPresentationStyle

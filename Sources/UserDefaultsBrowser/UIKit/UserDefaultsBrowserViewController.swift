@@ -12,16 +12,13 @@ import SwiftUI
 //
 public class UserDefaultsBrowserViewController: UIViewController {
     private let suiteNames: [String]
-    private let excludeKeys: (String) -> Bool
     private let accentColor: UIColor
 
     public init(
         suiteNames: [String],
-        excludeKeys: @escaping (String) -> Bool,
         accentColor: UIColor
     ) {
         self.suiteNames = suiteNames
-        self.excludeKeys = excludeKeys
         self.accentColor = accentColor
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,7 +26,6 @@ public class UserDefaultsBrowserViewController: UIViewController {
     override public func viewDidLoad() {
         let browserView = UserDefaultsBrowserView(
             suiteNames: suiteNames,
-            excludeKeys: excludeKeys,
             accentColor: Color(accentColor)
         )
 

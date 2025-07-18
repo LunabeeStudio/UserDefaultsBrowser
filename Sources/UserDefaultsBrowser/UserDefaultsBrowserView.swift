@@ -13,23 +13,21 @@ public struct UserDefaultsBrowserView: View {
 
     private let suiteNames: [String]
     private let accentColor: Color
-    private let excludeKeys: (String) -> Bool
 
     public init(
         suiteNames: [String] = [],
-        excludeKeys: @escaping (String) -> Bool = { _ in false },
+        types: [UserDefaultsType] = [.user()],
         accentColor: Color = .accentColor
     ) {
         self.suiteNames = suiteNames
-        self.excludeKeys = excludeKeys
         self.accentColor = accentColor
     }
 
     private var defaults: [UserDefaultsContainer] {
         let standard = UserDefaultsContainer(
-            name: "standard",
+            name: "Standard",
             defaults: .standard,
-            excludeKeys: excludeKeys
+            excludeKeys: { _ in false } // TODO: To fix using user excluding keys.
         )
 
         return [standard] + suiteNames.compactMap { name in
@@ -37,7 +35,7 @@ public struct UserDefaultsBrowserView: View {
                 UserDefaultsContainer(
                     name: name,
                     defaults: $0,
-                    excludeKeys: excludeKeys
+                    excludeKeys: { _ in false } // TODO: To fix using user excluding keys.
                 )
             }
         }
@@ -51,10 +49,30 @@ public struct UserDefaultsBrowserView: View {
                     // 􀉩 User
                     //
                     tabContent(title: "User") {
-                        SearchContainerView(type: .user, defaults: defaults)
+                        SearchContainerView(type: .user(), defaults: defaults)
                     }
                     .tabItem {
                         Label("User", systemImage: "person")
+                    }
+
+                    //
+                    // 􀟜 Firebase
+                    //
+                    tabContent(title: "Firebase") {
+                        SearchContainerView(type: .firebase, defaults: defaults)
+                    }
+                    .tabItem {
+                        Label("Firebase", systemImage: "iphone")
+                    }
+
+                    //
+                    // 􀟜 Facebook
+                    //
+                    tabContent(title: "Facebook") {
+                        SearchContainerView(type: .facebook, defaults: defaults)
+                    }
+                    .tabItem {
+                        Label("Facebook", systemImage: "iphone")
                     }
 
                     //
@@ -68,31 +86,49 @@ public struct UserDefaultsBrowserView: View {
                     }
                 }
             } else {
-                NavigationView {
-                    List {
-                        //
-                        // 􀉩 User
-                        //
-                        NavigationLink {
-                            SearchContainerView(type: .user, defaults: defaults)
-                                .navigationTitle("User")
-                        } label: {
-                            Label("User", systemImage: "person")
-                        }
-
-                        //
-                        // 􀟜 System
-                        //
-                        NavigationLink {
-                            SearchContainerView(type: .system, defaults: defaults)
-                                .navigationTitle("System")
-                        } label: {
-                            Label("System", systemImage: "iphone")
-                        }
+                List {
+                    //
+                    // 􀉩 User
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .user(), defaults: defaults)
+                            .navigationTitle("User")
+                    } label: {
+                        Label("User", systemImage: "person")
                     }
-                    .navigationTitle("UserDefaults Browser")
-                    .navigationBarTitleDisplayMode(.inline)
+
+                    //
+                    // 􀟜 Firebase
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .firebase, defaults: defaults)
+                            .navigationTitle("Firebase")
+                    } label: {
+                        Label("Firebase", systemImage: "iphone")
+                    }
+
+                    //
+                    // 􀟜 Facebook
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .facebook, defaults: defaults)
+                            .navigationTitle("Facebook")
+                    } label: {
+                        Label("Facebook", systemImage: "iphone")
+                    }
+
+                    //
+                    // 􀟜 System
+                    //
+                    NavigationLink {
+                        SearchContainerView(type: .system, defaults: defaults)
+                            .navigationTitle("System")
+                    } label: {
+                        Label("System", systemImage: "iphone")
+                    }
                 }
+                .navigationTitle("UserDefaults Browser")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
         .accentColor(accentColor)

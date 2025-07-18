@@ -64,14 +64,14 @@ struct SectionView: View {
                 //
                 // 􀍡
                 //
-                if type == .user {
+                if case .user = type {
                     Menu {
                         Group {
                             //
                             // 􀩼 Dump as Swift code
                             //
                             Button {
-                                print(exportSwiftCode)
+                                let _ = print(exportSwiftCode)
                             } label: {
                                 Label("Dump as Swift code", systemImage: "terminal")
                             }
@@ -80,7 +80,7 @@ struct SectionView: View {
                             // 􀙚 Dump as JSON
                             //
                             Button {
-                                print(exportJSON)
+                                let _ = print(exportJSON)
                             } label: {
                                 Label("Dump as JSON", systemImage: "terminal")
                             }
@@ -162,7 +162,7 @@ struct SectionView: View {
         //
         // e.g. "xxx/xxx/isExpanded/user.standard"
         //
-        UserDefaults.keyPrefix + "isExpanded/\(type.rawValue).\(defaults.name)"
+        UserDefaults.keyPrefix + "isExpanded/\(type.name).\(defaults.name)"
     }
 
     private var exportSwiftCode: String {

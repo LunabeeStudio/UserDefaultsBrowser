@@ -12,18 +12,32 @@ private let userDefaultsSystemKeys: [String] = [
     "CarCapabilities",
     "MSVLoggingMasterSwitchEnabledKey",
     "PreferredLanguages",
+    "shouldShowRSVPDataDetectors"
 ]
 
 private let userDefaultsSystemKeyPrefixes: [String] = [
     "Apple",
+    "cloud.",
     "com.apple.",
     "internalSettings.",
-    "METAL_",
+    "METAL",
     "INNext",
     "AK",
+    "_AK",
     "NS",
+    "SS",
     "PK",
     "WebKit",
+    "Mapping_"
+]
+
+private let userDefaultsFacebookKeyPrefixes: [String] = [
+    "com.facebook"
+]
+
+private let userDefaultsFirebaseKeyPrefixes: [String] = [
+    "com.fireperf",
+    "firebase"
 ]
 
 struct UserDefaultsContainer: Identifiable {
@@ -49,10 +63,20 @@ struct UserDefaultsContainer: Identifiable {
         allKeys.filter { isSystemKey($0) == false }
     }
 
+    var facebookKeys: [String] {
+        allKeys.filter { isFacebookKey($0) == false }
+    }
+
+    var firebaseKeys: [String] {
+        allKeys.filter { isFirebaseKey($0) == false }
+    }
+
     func extractKeys(of type: UserDefaultsType) -> [String] {
         switch type {
         case .user: return userKeys
         case .system: return systemKeys
+        case .facebook: return facebookKeys
+        case .firebase: return firebaseKeys
         }
     }
 
@@ -75,5 +99,13 @@ struct UserDefaultsContainer: Identifiable {
     private func isSystemKey(_ key: String) -> Bool {
         userDefaultsSystemKeys.contains(key) ||
             userDefaultsSystemKeyPrefixes.contains { key.hasPrefix($0) }
+    }
+
+    private func isFacebookKey(_ key: String) -> Bool {
+        userDefaultsFacebookKeyPrefixes.contains { key.hasPrefix($0) }
+    }
+
+    private func isFirebaseKey(_ key: String) -> Bool {
+        userDefaultsFirebaseKeyPrefixes.contains { key.hasPrefix($0) }
     }
 }

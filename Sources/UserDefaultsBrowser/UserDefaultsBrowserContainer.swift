@@ -10,7 +10,6 @@ import SwiftUICommon
 
 public struct UserDefaultsBrowserContainer<Content: View>: View {
     private let suiteNames: [String]
-    private let excludeKeys: (String) -> Bool
     private let accentColor: Color
     private let imageName: String
     private let displayStyle: DisplayStyle
@@ -18,14 +17,12 @@ public struct UserDefaultsBrowserContainer<Content: View>: View {
 
     public init(
         suiteNames: [String] = [],
-        excludeKeys: @escaping (String) -> Bool = { _ in false },
         accentColor: Color = .blue,
         imageName: String = "externaldrive",
         displayStyle: DisplayStyle = .sheet,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.suiteNames = suiteNames
-        self.excludeKeys = excludeKeys
         self.accentColor = accentColor
         self.imageName = imageName
         self.displayStyle = displayStyle
@@ -67,7 +64,6 @@ public struct UserDefaultsBrowserContainer<Content: View>: View {
     private func browser() -> some View {
         UserDefaultsBrowserView(
             suiteNames: suiteNames,
-            excludeKeys: excludeKeys,
             accentColor: accentColor
         )
     }
