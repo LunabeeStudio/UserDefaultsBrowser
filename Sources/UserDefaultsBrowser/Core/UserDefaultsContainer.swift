@@ -29,7 +29,9 @@ private let userDefaultsSystemKeyPrefixes: [String] = [
     "SS",
     "PK",
     "WebKit",
-    "mapping_"
+    "mapping_",
+    "CK",
+    "kCK"
 ]
 
 private let userDefaultsFacebookKeyPrefixes: [String] = [
