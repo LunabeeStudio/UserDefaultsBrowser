@@ -49,7 +49,7 @@ struct UserDefaultsContainer: Identifiable {
 
     var allKeys: [String] {
         Array(
-            defaults.dictionaryRepresentation().keys.exclude {
+            defaults.dictionaryRepresentation().dictionaryByReplacingDataWithHex().keys.exclude {
                 isOSSKey($0)
             }
         )

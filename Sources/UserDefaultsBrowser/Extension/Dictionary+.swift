@@ -38,3 +38,28 @@ extension Dictionary where Key == String, Value == Any {
         }
     }
 }
+
+extension Data {
+    var hexString: String {
+        map { String(format: "%02hhx", $0) }.joined()
+    }
+}
+
+func replacingDataWithHex(in value: Any) -> Any {
+    switch value {
+    case let data as Data:
+        return data.hexString
+    case let dict as [String: Any]:
+        return dict.mapValues(replacingDataWithHex(in:))
+    case let array as [Any]:
+        return array.map(replacingDataWithHex(in:))
+    default:
+        return value
+    }
+}
+
+extension [String: Any] {
+    func dictionaryByReplacingDataWithHex() -> Self {
+        self.mapValues(replacingDataWithHex(in:))
+    }
+}
