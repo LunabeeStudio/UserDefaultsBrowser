@@ -20,7 +20,7 @@ extension Dictionary where Key == String, Value == Any {
     var prettyJSON: String {
         do {
             let data = try JSONSerialization.data(
-                withJSONObject: self,
+                withJSONObject: self.dictionaryByReplacingDataWithHex(),
                 options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
             )
             return String(data: data, encoding: .utf8)!
@@ -31,7 +31,7 @@ extension Dictionary where Key == String, Value == Any {
 
     var serializedJSON: String? {
         do {
-            let data = try JSONSerialization.data(withJSONObject: self)
+            let data = try JSONSerialization.data(withJSONObject: self.dictionaryByReplacingDataWithHex())
             return String(data: data, encoding: .utf8)
         } catch {
             preconditionFailure(error.localizedDescription)
