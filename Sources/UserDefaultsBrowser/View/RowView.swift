@@ -7,7 +7,6 @@
 
 import SwiftPrettyPrint
 import SwiftUI
-import SwiftUICommon
 
 private enum Value {
     case text(String)
@@ -148,7 +147,7 @@ struct RowView: View {
                     } label: {
                         Image(systemName: "pencil")
                     }
-                    .enabled(value.isEditable)
+                    .disabled(!value.isEditable)
                 }
                 .font(.system(size: 16, weight: .regular))
             }
@@ -181,20 +180,12 @@ struct RowView: View {
 
                 case let .image(uiImage):
                     //
-                    // ⚠️ Display is corrupted with iOS 14. (SwiftUI bug, maybe)
+                    // 💡 Native size when it fits, scaled down to the available width otherwise.
                     //
-                    if #available(iOS 15, *) {
-                        ResizableImage(uiImage: uiImage, contentMode: .fit)
-                    } else {
-                        if uiImage.size.width < 200 {
-                            Image(uiImage: uiImage)
-                        } else {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 200)
-                        }
-                    }
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: uiImage.size.width)
 
                 case let .data(text):
                     Text(text)

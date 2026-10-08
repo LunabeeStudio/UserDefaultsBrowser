@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUICommon
 
 public struct UserDefaultsBrowserContainer<Content: View>: View {
     private let suiteNames: [String]
@@ -33,6 +32,21 @@ public struct UserDefaultsBrowserContainer<Content: View>: View {
     @State private var isPresentedFullScreenCover = false
 
     public var body: some View {
+        switch displayStyle {
+        case .sheet:
+            container()
+                .sheet(isPresented: $isPresentedSheet) {
+                    browser()
+                }
+        case .fullScreen:
+            container()
+                .fullScreenCover(isPresented: $isPresentedSheet) {
+                    browser()
+                }
+        }
+    }
+
+    private func container() -> some View {
         ZStack(alignment: .bottomLeading) {
             content()
 
@@ -44,20 +58,6 @@ public struct UserDefaultsBrowserContainer<Content: View>: View {
                     .contentShape(Rectangle())
             }
             .accentColor(accentColor)
-        }
-        .extend { parent in
-            switch displayStyle {
-            case .sheet:
-                parent
-                    .sheet(isPresented: $isPresentedSheet) {
-                        browser()
-                    }
-            case .fullScreen:
-                parent
-                    .fullScreenCover(isPresented: $isPresentedSheet) {
-                        browser()
-                    }
-            }
         }
     }
 
